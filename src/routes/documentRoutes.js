@@ -8,4 +8,6 @@ router.get('/', documentController.getAllDocuments);
 // POST create a new document
 router.post('/', documentController.createDocument);
 
+router.post('/updateById/:id', documentController.updateDocument);
+
 module.exports = router;
