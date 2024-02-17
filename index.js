@@ -3,10 +3,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const authMiddleware = require('./src/middlewares/authMiddleware');
+const session = require('express-session');
+
+
 require('dotenv').config();
 
 
 const documentRoutes = require('./src/routes/documentRoutes');
+const userRoutes = require('./src/routes/userRoutes');
 
 if (cluster.isMaster) {
 
@@ -44,6 +49,8 @@ if (cluster.isMaster) {
 
   // Routes
   app.use('/documents', documentRoutes);
+  app.use('/user', userRoutes);
+  app.use(authMiddleware)
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {

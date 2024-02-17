@@ -1,5 +1,6 @@
 const Document = require('../models/documents');
 
+
 //Get all documents
 exports.getAllDocuments = async (req, res) => {
     try {
